@@ -22,22 +22,22 @@ public class SkillController {
     @Autowired
     SkillService service;
 
-    @RequestMapping(value="/all-skills", method = RequestMethod.GET)
-    public String showAllSkills(ModelMap model){
+    @RequestMapping(value = "/all-skills", method = RequestMethod.GET)
+    public String showAllSkills(ModelMap model) {
         List<SkillWord> skillWords = service.retrieveAllSkills();
-        model.put("skillWords", skillWords );
+        model.put("skillWords", skillWords);
         return "skills";
     }
 
-    @RequestMapping(value="/refresh-skills", method = RequestMethod.GET)
-    public String refreshAllSkills(ModelMap model){
+    @RequestMapping(value = "/refresh-skills", method = RequestMethod.GET)
+    public String refreshAllSkills(ModelMap model) {
         try {
             service.refreshAllSkilles();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         List<SkillWord> skillWords = service.retrieveAllSkills();
-        model.put("skillWords", skillWords );
+        model.put("skillWords", skillWords);
         return "redirect:/all-skills";
     }
 
@@ -56,7 +56,7 @@ public class SkillController {
     public String deleteDocument(@RequestParam int id) {
         String user = getLoggedInUserName();
         try {
-            service.deleteSkillPerm(user,id);
+            service.deleteSkillPerm(user, id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

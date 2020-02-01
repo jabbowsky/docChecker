@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("name")
-public class CompareController  {
+public class CompareController {
 
     @Autowired
     SkillService skillService;
@@ -28,14 +28,14 @@ public class CompareController  {
     @Autowired
     DocService docService;
 
-    @RequestMapping(value="/compare", method = RequestMethod.GET)
-    public String showDocs(ModelMap model){
+    @RequestMapping(value = "/compare", method = RequestMethod.GET)
+    public String showDocs(ModelMap model) {
         String user = getLoggedInUserName();
         List<Skill> skills = skillService.retrieveSkills(user);
         model.put("skills", skills);
         model.put("docs", docService.coloredDocs(user, skills));
-        model.addAttribute("skill", new Skill(0, user,  "add new skill"));
-        model.addAttribute("document", new Document(0, user, "add header", "add doc text",new ArrayList<SkillWord>()));
+        model.addAttribute("skill", new Skill(0, user, "add new skill"));
+        model.addAttribute("document", new Document(0, user, "add header", "add doc text", new ArrayList<SkillWord>()));
         return "compare";
     }
 
@@ -49,6 +49,7 @@ public class CompareController  {
 
         return principal.toString();
     }
+
     @RequestMapping(value = "/delete-skill", method = RequestMethod.GET)
     public String deleteSkill(@RequestParam int id) {
         String user = getLoggedInUserName();
@@ -66,43 +67,43 @@ public class CompareController  {
     @RequestMapping(value = "/delete-document", method = RequestMethod.GET)
     public String deleteDocument(@RequestParam int id) {
         String user = getLoggedInUserName();
-        docService.deleteDocument(user , id);
+        docService.deleteDocument(user, id);
         return "redirect:/compare";
     }
 
     @RequestMapping(value = "/find-skills-in-document", method = RequestMethod.GET)
     public String findSkillsInDocument(@RequestParam int id) {
         docService.parseDocumentSkills(id, skillService.retrieveAllSkills());
-        System.err.println("parseDocumentSkills  " );
+        System.err.println("parseDocumentSkills  ");
         return "redirect:/compare";
     }
 
 
     @RequestMapping(value = "/compare", method = RequestMethod.POST)
-    public String checkForms(@ModelAttribute(value="skill") @Valid Skill skill, BindingResult skillResult,
-                             @ModelAttribute(value="document") @Valid Document document, BindingResult docResult
+    public String checkForms(@ModelAttribute(value = "skill") @Valid Skill skill, BindingResult skillResult,
+                             @ModelAttribute(value = "document") @Valid Document document, BindingResult docResult
     ) {
         String user = getLoggedInUserName();
         if (skillResult.hasErrors() && docResult.hasErrors()) {
-            for(ObjectError err: skillResult.getAllErrors() ){
-                System.err.println("skillResult error "+ err.toString());
+            for (ObjectError err : skillResult.getAllErrors()) {
+                System.err.println("skillResult error " + err.toString());
             }
-            for(ObjectError err: docResult.getAllErrors() ){
-                System.err.println("docResult error "+ err.toString());
+            for (ObjectError err : docResult.getAllErrors()) {
+                System.err.println("docResult error " + err.toString());
             }
             return "error";
         }
-        if(document != null && document.getText() != null && !document.getText().equals("add doc text")){
-            docService.addDocument(user, document.getHeader(),document.getText());
+        if (document != null && document.getText() != null && !document.getText().equals("add doc text")) {
+            docService.addDocument(user, document.getHeader(), document.getText());
         }
 
-        if(skill != null && skill.getName() != null && !skill.getName().equals("add new skill")){
-            if(skill.getName().contains(",")){
-                String [] skills = skill.getName().split(",");
-                for(String skillName : skills){
+        if (skill != null && skill.getName() != null && !skill.getName().equals("add new skill")) {
+            if (skill.getName().contains(",")) {
+                String[] skills = skill.getName().split(",");
+                for (String skillName : skills) {
                     skillService.addSkill(user, skillName.trim());
                 }
-            }else{
+            } else {
                 skillService.addSkill(user, skill.getName());
             }
         }

@@ -14,7 +14,7 @@ public class SkillService {
 
     private static List<Skill> skills = new ArrayList<>();
     private static int skillCount = 0;
-    private static Set<SkillWord> allSkills  = new HashSet<>();
+    private static Set<SkillWord> allSkills = new HashSet<>();
     private static DaoConnection dao;
 
     static {
@@ -32,7 +32,7 @@ public class SkillService {
     public List<Skill> retrieveSkills(String user) {
         List<Skill> filteredSkills = new ArrayList<Skill>();
         for (Skill skill : skills) {
-            if(skill.getUser().equalsIgnoreCase(user)){
+            if (skill.getUser().equalsIgnoreCase(user)) {
                 filteredSkills.add(skill);
             }
         }
@@ -47,7 +47,7 @@ public class SkillService {
 
     public Skill retrieveSkill(int id) {
         for (Skill skill : skills) {
-            if (skill.getId()==id) {
+            if (skill.getId() == id) {
                 return skill;
             }
         }
@@ -60,38 +60,41 @@ public class SkillService {
         int firstEmptyNum = 0;
         Collections.sort(skills, new SortById());
         for (Skill skill : skills) {
-            if (skill.getUser().equalsIgnoreCase(user)){
-                if(numNotFound) {
-                    if (skill.getId() == firstEmptyNum ) { firstEmptyNum++; }
-                    else { numNotFound = false; }
+            if (skill.getUser().equalsIgnoreCase(user)) {
+                if (numNotFound) {
+                    if (skill.getId() == firstEmptyNum) {
+                        firstEmptyNum++;
+                    } else {
+                        numNotFound = false;
+                    }
                 }
-                if(skill.getName().equals(name) ){
+                if (skill.getName().equals(name)) {
                     skillFound = true;
                 }
             }
         }
-        if(skillFound == false ){
+        if (skillFound == false) {
             ++skillCount;
-            skills.add(new Skill(firstEmptyNum,user, name));
+            skills.add(new Skill(firstEmptyNum, user, name));
             SkillWord word = new SkillWord(name);
             allSkills.add(word);
         }
     }
 
-    public void deleteSkill(String user, int id){
+    public void deleteSkill(String user, int id) {
         for (Iterator<Skill> itrSkill = skills.iterator(); itrSkill.hasNext(); ) {
             Skill curSkill = itrSkill.next();
-            if (curSkill.getUser().equalsIgnoreCase(user) && curSkill.getId() == id ){
+            if (curSkill.getUser().equalsIgnoreCase(user) && curSkill.getId() == id) {
                 itrSkill.remove();
                 skillCount--;
             }
         }
     }
 
-    public void clearSkills(String user){
+    public void clearSkills(String user) {
         for (Iterator<Skill> itrSkill = skills.iterator(); itrSkill.hasNext(); ) {
             Skill curSkill = itrSkill.next();
-            if (curSkill.getUser().equalsIgnoreCase(user) ){
+            if (curSkill.getUser().equalsIgnoreCase(user)) {
                 itrSkill.remove();
                 skillCount--;
             }
@@ -101,7 +104,7 @@ public class SkillService {
     public void deleteSkillPerm(String user, int id) throws SQLException {
         for (Iterator<SkillWord> itrSkill = allSkills.iterator(); itrSkill.hasNext(); ) {
             SkillWord curSkill = itrSkill.next();
-            if (curSkill.getId() == id ){
+            if (curSkill.getId() == id) {
                 curSkill.setDelete(true);
                 curSkill.setSaved(false);
             }
@@ -111,7 +114,7 @@ public class SkillService {
     public void refreshAllSkilles() throws SQLException {
         for (Iterator<SkillWord> itrSkill = allSkills.iterator(); itrSkill.hasNext(); ) {
             SkillWord curSkill = itrSkill.next();
-            if (curSkill.isSaved()){
+            if (curSkill.isSaved()) {
                 itrSkill.remove();
             }
         }
@@ -124,8 +127,8 @@ public class SkillService {
         List<SkillWord> skillToDelete = new ArrayList<>();
         for (Iterator<SkillWord> itrSkill = allSkills.iterator(); itrSkill.hasNext(); ) {
             SkillWord curSkill = itrSkill.next();
-            if(!curSkill.isSaved()){
-                if(curSkill.isDelete()){
+            if (!curSkill.isSaved()) {
+                if (curSkill.isDelete()) {
                     skillToDelete.add(curSkill);
                 } else {
                     skillToSave.add(curSkill);
@@ -134,10 +137,10 @@ public class SkillService {
                 itrSkill.remove();
             }
         }
-        if( skillToSave.size() > 0 ){
+        if (skillToSave.size() > 0) {
             dao.insertSkill(skillToSave);
         }
-        if( skillToDelete.size() > 0 ){
+        if (skillToDelete.size() > 0) {
             dao.deleteSkill(skillToDelete);
         }
     }
@@ -146,7 +149,7 @@ public class SkillService {
         return skillCount;
     }
 
-    private class SortById  implements Comparator<Skill> {
+    private class SortById implements Comparator<Skill> {
         public int compare(Skill a, Skill b) {
             return a.getId() - b.getId();
         }

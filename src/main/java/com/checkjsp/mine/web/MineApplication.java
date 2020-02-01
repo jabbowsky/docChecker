@@ -11,11 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.checkjsp.mine.web")
 public class MineApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(MineApplication.class);
-	}
-	public static void main(String[] args) {
-		SpringApplication.run(MineApplication.class, args);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(MineApplication.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(MineApplication.class, args);
+    }
 }

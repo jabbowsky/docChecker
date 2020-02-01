@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //Create User - in28Minutes/dummy
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login").permitAll()
-                .antMatchers("/", "/*todo*/**","/compare","/*skill*","/*skill*/**").access("hasRole('USER')").and()
+                .antMatchers("/", "/*todo*/**", "/compare", "/*skill*", "/*skill*/**").access("hasRole('USER')").and()
                 .formLogin();
     }
 }

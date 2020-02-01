@@ -16,7 +16,7 @@ public class DaoConnection {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr?useSSL=false&allowPublicKeyRetrieval=true","hr","hr");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr?useSSL=false&allowPublicKeyRetrieval=true", "hr", "hr");
             connection.setAutoCommit(false);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -32,18 +32,18 @@ public class DaoConnection {
     }
 
     public Set<SkillWord> getSkills() throws SQLException {
-        Statement stmt= connection.createStatement();
-        ResultSet rs=stmt.executeQuery("select skill_id, skill_name from skills");
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select skill_id, skill_name from skills");
         Set<SkillWord> skills = new HashSet<SkillWord>();
-        while(rs.next()){
-            skills.add(new SkillWord(rs.getInt(1),rs.getString(2),true));
+        while (rs.next()) {
+            skills.add(new SkillWord(rs.getInt(1), rs.getString(2), true));
         }
         return skills;
     }
 
     public void deleteSkill(List<SkillWord> skills) throws SQLException {
-        for(SkillWord skillWord : skills){
-            deleteSkillSql.setInt(1,skillWord.getId());
+        for (SkillWord skillWord : skills) {
+            deleteSkillSql.setInt(1, skillWord.getId());
             deleteSkillSql.addBatch();
         }
         deleteSkillSql.executeBatch();
@@ -51,9 +51,9 @@ public class DaoConnection {
     }
 
     public void insertSkill(List<SkillWord> skills) throws SQLException {
-        for(SkillWord skillWord : skills){
-            insertSkillSql.setString(1,skillWord.getName());
-            insertSkillSql.setInt(2,skillWord.getId());
+        for (SkillWord skillWord : skills) {
+            insertSkillSql.setString(1, skillWord.getName());
+            insertSkillSql.setInt(2, skillWord.getId());
             insertSkillSql.addBatch();
         }
         insertSkillSql.executeBatch();

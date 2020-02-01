@@ -13,14 +13,14 @@ public class SkillWord {
     private boolean delete = false;
     private List<String> keyWords = new ArrayList<>();
 
-    public SkillWord(String name ){
+    public SkillWord(String name) {
         this.id = maxId++;
         this.name = name;
         this.keyWords.add(name);
     }
 
 
-    public SkillWord(int id, String name, boolean saved){
+    public SkillWord(int id, String name, boolean saved) {
         this(name);
         this.id = id;
         this.saved = saved;
@@ -70,7 +70,7 @@ public class SkillWord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SkillWord skillWord  = (SkillWord) o;
+        SkillWord skillWord = (SkillWord) o;
         return this.name.equals(skillWord.name);
     }
 

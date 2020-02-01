@@ -54,7 +54,7 @@ public class Skill {
         return Objects.hash(id + ", " + name);
     }
 
-    public Skill(int id,  String user, String name) {
+    public Skill(int id, String user, String name) {
         this.id = id;
         this.user = user;
         this.name = name;

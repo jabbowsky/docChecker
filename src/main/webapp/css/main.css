@@ -1,0 +1,195 @@
+.color_0 {
+    background-color: #E6CF94;
+}
+.color_1 {
+    background-color: #082941;
+    color: wheat;
+}
+.color_2 {
+    background-color: #084C73;
+    color: #FFFFFF;
+}
+.color_3 {
+    background-color: #719CA6;
+    color: #FFFFFF;
+}
+.color_4 {
+    background-color: #5A6429;
+    color: #FFFFFF;
+}
+.color_5 {
+    background-color: #7AAF39;
+}
+.color_6 {
+    background-color: #BDD752;
+}
+.color_7 {
+    background-color: #C23A29;
+    color: wheat;
+}
+.color_8 {
+    background-color: #D45221;
+}
+.color_9 {
+    background-color: #D66B7B;
+}
+.color_10 {
+    background-color: #42297B;
+    color: wheat;
+}
+.color_11 {
+    background-color: #825C79;
+    color: wheat;
+}
+.color_12 {
+    background-color: #9CA5CE;
+}
+.color_13 {
+    background-color: #846C42;
+    color: #FFFFFF;
+}
+.color_14 {
+    background-color: #C0AC62;
+}
+.color_15 {
+    background-color: #CCBE8C;
+}
+.color_16 {
+    background-color: #426460;
+    color: #FFFFFF;
+}
+.color_17 {
+    background-color: #94AD8C;
+}
+.color_18 {
+    background-color: #C7DCA4;
+}
+.color_19 {
+    background-color: #386584;
+    color: wheat;
+}
+.color_20 {
+    background-color: #5A9BB5;
+    color: wheat;
+}
+.color_21 {
+    background-color: #9CC6ED;
+}
+.color_22 {
+    background-color: #9F5148;
+    color: wheat;
+}
+.color_23 {
+    background-color: #D49773;
+}
+.color_24 {
+    background-color: #EFB57C;
+}
+.color_25 {
+    background-color: #A4293A;
+    color: wheat;
+}
+.color_26 {
+    background-color: #D4643A;
+}
+.color_27 {
+    background-color: #EFBF6B;
+}
+.color_28 {
+    background-color: #61433A;
+    color: wheat;
+}
+.color_29 {
+    background-color: #BD7A49;
+}
+
+.skill {
+    font-weight: bold;
+    margin: 3px;
+    width: fit-content;
+    padding: 3px;
+    display: inline-block;
+}
+
+.hidden-controls{
+    display: none;
+}
+
+.controls{
+    display: inline-block;
+    vertical-align: super;
+}
+
+.container.skills {
+    width: fit-content;
+    position: absolute;
+}
+
+.container.document {
+    position: relative;
+    left: 200px
+}
+
+.inline-skill{
+    display: inline;
+    width: fit-content;
+}
+
+.delete-skill-button{
+    width: 19px;
+    display: inline-block;
+}
+
+.any-button{
+    width: 19px;
+    display: inline-block;
+}
+
+.delete-doc-button{
+    width: 22px;
+    display: inline-block;
+}
+
+.important {
+    font-weight: bold;
+}
+
+.h3 {
+    font-size: 24px;
+    width: fit-content;
+    display: inline-block;
+}
+
+div.all-skill-words {
+    display: inline-block;
+    margin: 2px;
+    width: fit-content;
+    padding: 2px;
+}
+
+.all-skills{
+    display: inline-block;
+}
+
+.skill-word-deleted-false {
+    background-color: #dff0d8;
+}
+
+.skill-word-deleted-true {
+    background-color: #EEEEEE;
+    text-decoration: line-through;
+}
+
+.saved-true{
+    font-weight: bold;
+}
+
+.saved-false{
+    font-style: oblique;
+}
+
+
+.skill-db-button{
+    width: 23px;
+    display: inline-block;
+}

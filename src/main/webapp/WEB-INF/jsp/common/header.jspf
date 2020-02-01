@@ -1,0 +1,40 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<html>
+
+<head>
+<title>Luxoft HR helper</title>
+
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="icon" href="img/favicon.gif">
+
+<script>
+window.onload = function() {
+$( "div.object-and-buttons" )
+  .mouseenter(function() {
+    var id = $( this ).attr("id");
+    $("#controls_"+ id ).removeClass("hidden-controls");
+    $("#controls_"+ id ).addClass("controls");
+    if (id.includes("skill")){
+        var divs = $( "div."+ id  );
+        $( "div.document" ).find( divs ).addClass("important");
+    }
+  })
+  .mouseleave(function() {
+    var id = $( this ).attr("id");
+    $("#controls_"+ id ).removeClass("controls");
+    $("#controls_"+ id ).addClass("hidden-controls");
+    if (id.includes("skill")){
+        var divs = $( "div."+ id  );
+        $( "div.document" ).find( divs ).removeClass("important");
+    }
+  });
+};
+</script>
+
+</head>
+
+<body>
